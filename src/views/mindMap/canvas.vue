@@ -17,7 +17,7 @@ export default defineComponent({
     const miniMapContainerRef = ref(null);
     onMounted(() => {
       new Graph({
-        height:700,
+        height:600,
         container: containerRef.value, // 画布的容器
         selecting: true,
         snapline: true, // 对齐线
