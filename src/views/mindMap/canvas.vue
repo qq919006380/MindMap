@@ -6,14 +6,10 @@
 </template>
 
 <script>
-import { defineComponent } from "@vue/composition-api";
-import "@antv/x6-vue-shape";
-import { Graph, Shape } from "@antv/x6";
 import { ref, onMounted } from "vue";
-import BaseGraph from './baseGraph' //  GraphData, GraphOptions
+import BaseGraph from "./baseGraph"; //  GraphData, GraphOptions
 
-
-export default defineComponent({
+export default {
   setup() {
     const containerRef = ref(null);
     const miniMapContainerRef = ref(null);
@@ -26,14 +22,24 @@ export default defineComponent({
           enabled: true,
           container: miniMapContainerRef.value,
         },
-
-      })
-      console.log('ca', graph)
+      });
+      // 双击进入编辑模式
+      graph.on("node:dblclick", ({ cell, e }) => {
+        cell.addTools({
+          name: "node-editor",
+          args: {
+            attrs: {
+              fontSize: "24",
+            },
+          },
+          
+        });
+      });
     });
 
     return { containerRef, miniMapContainerRef };
   },
-});
+};
 </script>
 
 

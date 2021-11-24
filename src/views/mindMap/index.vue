@@ -14,13 +14,12 @@
   </el-container>
 </template>
 <script>
-import { defineComponent } from "@vue/composition-api";
 import Canvas from "./canvas";
 import Header from "./header";
 import Aside from "./aside";
 
-export default defineComponent({
+export default {
   setup() { },
   components: { Canvas, Header, Aside },
-});
+};
 </script>
