@@ -27,6 +27,21 @@ export default {
       },
       true
     );
+    let common = {
+      body: {
+        fill: "#fff", // 背景颜色
+        stroke: "#000", // 边框颜色
+        ref: "text",
+        refWidth: 100,
+        refHeight: 60,
+        refX: -8,
+        refY: -8,
+      },
+      label: {
+        fill: "#333", // 文字颜色
+        fontSize: 16, // 文字大小
+      },
+    };
     let graph;
     let startDragToGraph = (type, e) => {
       let node = null;
@@ -37,25 +52,7 @@ export default {
             shape: "vue-shape",
             x: 300,
             y: 300,
-            width: 200,
-            height: 80,
-            attrs: {
-              body: {
-                fill: "#fff", // 背景颜色
-                stroke: "#000", // 边框颜色
-              },
-              //   text: {
-              //     textWrap: {
-              //       text: "使用 textWrap 实现文本换行",
-              //       width: -10, // 宽度减少 10px
-              //     },
-              //   },
-              label: {
-                text: "ssss", // 文本
-                fill: "#333", // 文字颜色
-                fontSize: 24, // 文字大小
-              },
-            },
+            attrs: common,
             component: "rect-node-component",
           });
           break;
@@ -66,24 +63,18 @@ export default {
             y: 300,
             width: 60,
             height: 60,
-            ports,
-            component: "end-node-component",
+            component: "circle-node-component",
           });
           break;
-        case "taskNode":
+        case "cylinder":
           node = graph.createNode({
-            type: "taskNode",
+            type: "cylinder",
             shape: "vue-shape",
             x: 300,
             y: 300,
             width: 300,
             height: 121,
-            ports,
-            data: {
-              name: "任务节点",
-              desc: "节点内容",
-            },
-            component: "task-node-component",
+            component: "cylinder-node-component",
           });
           break;
       }

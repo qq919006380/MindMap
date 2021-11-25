@@ -28,12 +28,15 @@ export default {
         cell.addTools({
           name: "node-editor",
           args: {
+             event: e,
             attrs: {
-              fontSize: "24",
+              fontSize: "16",
             },
           },
-          
+          getText:(Cell) => console.log(Cell)
         });
+
+        
       });
     });
 
