@@ -5,44 +5,29 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from "vue";
-import BaseGraph from "./baseGraph"; //  GraphData, GraphOptions
+<script setup>
+import { ref, onMounted, getCurrentInstance } from "vue";
+import BaseGraph from "./baseGraph";
+const { proxy } = getCurrentInstance();
 
-export default {
-  setup() {
-    const containerRef = ref(null);
-    const miniMapContainerRef = ref(null);
-    onMounted(() => {
-      let graph = BaseGraph.init({
-        // 画布的容器
-        container: containerRef.value,
-        // Scroller 后可开启小地图
-        minimap: {
-          enabled: true,
-          container: miniMapContainerRef.value,
-        },
-      });
-      // 双击进入编辑模式
-      graph.on("node:dblclick", ({ cell, e }) => {
-        cell.addTools({
-          name: "node-editor",
-          args: {
-             event: e,
-            attrs: {
-              fontSize: "16",
-            },
-          },
-          getText:(Cell) => console.log(Cell)
-        });
+const containerRef = ref(null);
+const miniMapContainerRef = ref(null);
+onMounted(() => {
+  let graph = BaseGraph.init({
+    // 画布的容器
+    container: containerRef.value,
+    // Scroller 后可开启小地图
+    minimap: {
+      enabled: true,
+      container: miniMapContainerRef.value,
+    },
+  });
 
-        
-      });
-    });
-
-    return { containerRef, miniMapContainerRef };
-  },
-};
+  graph.on("node:click", ({ node, e }) => {
+    proxy.$EventBus.emit("aside-select-name", "attr");
+    proxy.$EventBus.emit("canvas-select-node", node);
+  });
+});
 </script>
 
 
@@ -56,5 +41,25 @@ export default {
   bottom: 20px;
   right: 220px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.x6-graph-scroller::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  /**/
+}
+.x6-graph-scroller::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+.x6-graph-scroller::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 10px;
+}
+.x6-graph-scroller::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+.x6-graph-scroller::-webkit-scrollbar-corner {
+  background: rgb(239, 239, 239);
 }
 </style>

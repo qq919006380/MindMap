@@ -4,7 +4,7 @@
       <Header></Header>
     </el-header>
     <el-container>
-      <el-main style="padding:0">
+      <el-main style="padding:0;">
         <Canvas></Canvas>
       </el-main>
       <el-aside width="200px">
@@ -16,7 +16,7 @@
 <script>
 import Canvas from "./canvas";
 import Header from "./header";
-import Aside from "./aside";
+import Aside from "./aside/index.vue";
 
 export default {
   setup() { },
