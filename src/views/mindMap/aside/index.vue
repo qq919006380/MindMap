@@ -40,21 +40,6 @@ Graph.registerVueComponent(
   },
   true
 );
-let common = {
-  body: {
-    fill: "#fff", // 背景颜色
-    stroke: "#000", // 边框颜色
-    ref: "text",
-    refWidth: 100,
-    refHeight: 60,
-    refX: -8,
-    refY: -8,
-  },
-  label: {
-    fill: "#333", // 文字颜色
-    fontSize: 16, // 文字大小
-  },
-};
 let graph;
 let startDragToGraph = (type, e) => {
   let node = null;
@@ -65,19 +50,16 @@ let startDragToGraph = (type, e) => {
         shape: "vue-shape",
         x: 300,
         y: 300,
+        width: 200,
+        height: 120,
         attrs: {
           body: {
             fill: "#fff", // 背景颜色
             stroke: "#000", // 边框颜色
-            ref: "text",
-            refWidth: 100,
-            refHeight: 50,
-            refX: -8,
-            refY: -8,
           },
-          label:{
-            text:"s"
-          }
+        },
+        data: {
+          text: ""
         },
         component: "rect-node-component",
       });

@@ -1,35 +1,51 @@
 <template>
   <div>
-    <el-input
-      v-model="attrs.label.text"
-      :rows="2"
-      type="textarea"
-      placeholder="Please input"
-      @input="notifyChange"
-    />
-    <el-input-number size="mini" v-model="attrs.num" @input="notifyChange" />
+    <el-form label-position="right" label-width="60px" size="mini">
+      <el-form-item label="文本">
+        <el-input
+          v-model="data.text"
+          :rows="2"
+          placeholder="Please input"
+          @input="notifyChange"
+          type="textarea"
+        />
+      </el-form-item>
+      <el-form-item label="宽">
+        <el-input size="mini" v-model.number="attrs.width" @input="notifyChange" />
+      </el-form-item>
+      <el-form-item label="高">
+        <el-input size="mini" v-model.number="attrs.height" @input="notifyChange"   />
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script setup>
 import { getCurrentInstance, reactive } from "vue";
+let selectNode = null
 let attrs = reactive({
   body: {},
   label: {
-    text:""
+    text: ""
   }
 })
+let data = reactive({
+  text: ""
+})
 
-let selectNode = null
+
+
 const { proxy } = getCurrentInstance();
 proxy.$EventBus.on("canvas-select-node", (node) => {
   selectNode = node
-  Object.assign(attrs,selectNode.getAttrs())
-  console.log(selectNode.getAttrs())
+  console.log({ ...attrs, ...data })
+  Object.assign(attrs, selectNode.getAttrs())
+  Object.assign(data, selectNode.getData())
+
 });
 function notifyChange() {
-  console.log(selectNode)
   selectNode.attr(attrs)
+  selectNode.setData(data)
 }
 </script>
 

@@ -7,7 +7,7 @@
       <el-main style="padding:0;">
         <Canvas></Canvas>
       </el-main>
-      <el-aside width="200px">
+      <el-aside width="250px">
         <Aside></Aside>
       </el-aside>
     </el-container>
