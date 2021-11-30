@@ -3,7 +3,7 @@
     <el-form label-position="right" label-width="60px" size="mini">
       <el-form-item label="文本">
         <el-input
-          v-model="data.text"
+          v-model="dataMap.text"
           :rows="2"
           placeholder="Please input"
           @input="notifyChange"
@@ -11,10 +11,10 @@
         />
       </el-form-item>
       <el-form-item label="宽">
-        <el-input size="mini" v-model.number="attrs.width" @input="notifyChange" />
+        <el-input size="mini" v-model.number="sizeMap.width" @input="notifyChange" />
       </el-form-item>
       <el-form-item label="高">
-        <el-input size="mini" v-model.number="attrs.height" @input="notifyChange"   />
+        <el-input size="mini" v-model.number="sizeMap.height" @input="notifyChange" />
       </el-form-item>
     </el-form>
   </div>
@@ -23,14 +23,18 @@
 <script setup>
 import { getCurrentInstance, reactive } from "vue";
 let selectNode = null
-let attrs = reactive({
+let attrsMap = reactive({
   body: {},
   label: {
     text: ""
   }
 })
-let data = reactive({
+let dataMap = reactive({
   text: ""
+})
+let sizeMap = reactive({
+  width: 0,
+  height: 0
 })
 
 
@@ -38,14 +42,14 @@ let data = reactive({
 const { proxy } = getCurrentInstance();
 proxy.$EventBus.on("canvas-select-node", (node) => {
   selectNode = node
-  console.log({ ...attrs, ...data })
-  Object.assign(attrs, selectNode.getAttrs())
-  Object.assign(data, selectNode.getData())
-
+  Object.assign(attrsMap, selectNode.getAttrs())
+  Object.assign(dataMap, selectNode.getData())
+  Object.assign(sizeMap, selectNode.getSize())
 });
 function notifyChange() {
-  selectNode.attr(attrs)
-  selectNode.setData(data)
+  selectNode.attr(attrsMap)
+  selectNode.setData(dataMap)
+  selectNode.setSize(sizeMap.width, sizeMap.height)
 }
 </script>
 
