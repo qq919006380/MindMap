@@ -28,7 +28,7 @@ import attr from "./attr.vue";
 
 let activeName = ref("model");
 const { proxy } = getCurrentInstance();
-proxy.$EventBus.on("aside-select-name", (name) => {
+proxy.$EventBus.on("aside-tabs-activeName", (name) => {
   activeName.value = name;
 });
 // 注册 vue 组件
@@ -52,6 +52,7 @@ let startDragToGraph = (type, e) => {
         y: 300,
         width: 200,
         height: 120,
+        zIndex:1,
         attrs: {
           body: {
             fill: "#fff", // 背景颜色

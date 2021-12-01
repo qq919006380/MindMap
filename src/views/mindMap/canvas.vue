@@ -24,9 +24,19 @@ onMounted(() => {
   });
 
   graph.on("node:click", ({ node, e }) => {
-    proxy.$EventBus.emit("aside-select-name", "attr");
+    proxy.$EventBus.emit("aside-tabs-activeName", "attr");
     proxy.$EventBus.emit("canvas-select-node", node);
   });
+  graph.on("node:added", ({ node, e }) => {
+    proxy.$EventBus.emit("aside-tabs-activeName", "attr");
+    proxy.$EventBus.emit("canvas-select-node", node);
+  });
+  graph.on("blank:click", () => {
+    proxy.$EventBus.emit("aside-tabs-activeName", "model");
+  });
+
+
+
 });
 </script>
 
