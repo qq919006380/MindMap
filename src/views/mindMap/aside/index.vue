@@ -12,7 +12,7 @@
           <dd>圆柱</dd>
         </dl>
       </el-tab-pane>
-      <el-tab-pane label="属性" name="attr">
+      <el-tab-pane label="属性" name="attr" :disabled="disabled">
         <attr></attr>
       </el-tab-pane>
     </el-tabs>
@@ -41,6 +41,7 @@ Graph.registerVueComponent(
   true
 );
 let graph;
+let disabled = ref(false)
 let startDragToGraph = (type, e) => {
   let node = null;
   switch (type) {
@@ -52,9 +53,10 @@ let startDragToGraph = (type, e) => {
         y: 300,
         width: 200,
         height: 120,
-        zIndex:1,
+        zIndex: 1,
         attrs: {
           body: {
+            strokeWidth: 1,
             fill: "#fff", // 背景颜色
             stroke: "#000", // 边框颜色
           },

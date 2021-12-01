@@ -34,6 +34,9 @@ onMounted(() => {
   graph.on("blank:click", () => {
     proxy.$EventBus.emit("aside-tabs-activeName", "model");
   });
+  graph.on("node:resizing", ({node}) => {
+    proxy.$EventBus.emit("canvas-select-node", node);
+  });
 
 
 

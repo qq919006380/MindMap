@@ -22,6 +22,18 @@ export default class BaseGraph {
    */
   static getDefaultCfg() {
     const defaultCfg = {
+      resizing: {
+        enabled: true,
+        orthogonal: false,
+        restricted: false,
+        preserveAspectRatio: false,
+
+        minWidth: 80,
+        maxWidth: 800,
+
+        minHeight: 60,
+        maxHeight: 600,
+      },
       // 网格
       grid: {
         size: 10,
