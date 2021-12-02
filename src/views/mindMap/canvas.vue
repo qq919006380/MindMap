@@ -7,12 +7,14 @@
 
 <script setup>
 import { ref, onMounted, getCurrentInstance } from "vue";
+import { FunctionExt } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 const { proxy } = getCurrentInstance();
 
 const containerRef = ref(null);
 const miniMapContainerRef = ref(null);
 onMounted(() => {
+
   let graph = BaseGraph.init({
     // 画布的容器
     container: containerRef.value,
@@ -34,11 +36,27 @@ onMounted(() => {
   graph.on("blank:click", () => {
     proxy.$EventBus.emit("aside-tabs-activeName", "model");
   });
-  graph.on("node:resizing", ({node}) => {
+  graph.on("node:resizing", ({ node }) => {
     proxy.$EventBus.emit("canvas-select-node", node);
   });
 
+  graph.on('node:mouseenter', FunctionExt.debounce(({ node }) => {
+    // 添加连接点
+    const ports = containerRef.value.querySelectorAll('.x6-port-body')
+    showPorts(ports, true)
+  }), 500)
+  graph.on('node:mouseleave', ({ node }) => {
+    const ports = containerRef.value.querySelectorAll('.x6-port-body')
+    // 添加连接点
+    showPorts(ports, false)
 
+  })
+  // 显示连线节点
+  function showPorts(ports, show) {
+    for (let i = 0, len = ports.length; i < len; i = i + 1) {
+      ports[i].style.visibility = show ? 'visible' : 'hidden'
+    }
+  }
 
 });
 </script>

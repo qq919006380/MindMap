@@ -38,7 +38,6 @@
           @change="notifyChange"
         />
       </el-form-item>
-       
 
       <el-form-item label="填充颜色">
         <el-color-picker
@@ -56,6 +55,9 @@
           @change="notifyChange"
         />
       </el-form-item>
+      <el-form-item label="边框粗细">
+        <el-slider input-size='mini' @input='notifyChange' :min='0' :max='10' v-model="attrsMap.body.strokeWidth"></el-slider>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -66,8 +68,9 @@ const divRef = ref()
 let selectNode = null
 let attrsMap = reactive({
   body: {
-    stroke: "",
-    fill: "",
+    stroke: null,
+    fill: null,
+    strokeWidth: null
   },
 })
 let dataMap = reactive({
@@ -100,13 +103,12 @@ proxy.$EventBus.on("canvas-select-node", (node) => {
   Object.assign(sizeMap, selectNode.getSize())//回显尺寸
   sizeMap.zIndex = selectNode.zIndex
   divRef.value.focus()
-  console.log(attrsMap)
+  notifyChange()
 });
 /**
  * 设置值
  */
 function notifyChange() {
-  console.log(attrsMap)
   selectNode.attr(attrsMap)
   selectNode.setData(dataMap)
   selectNode.setSize(sizeMap.width, sizeMap.height)

@@ -21,6 +21,7 @@ export default class BaseGraph {
    * @memberof X6BaseGraph
    */
   static getDefaultCfg() {
+    
     const defaultCfg = {
       resizing: {
         enabled: true,
@@ -67,9 +68,12 @@ export default class BaseGraph {
       connecting: {
         connector: {
           name: "rounded",
+          args: {
+            radius: 8,
+          },
         },
         router: {
-          name: "er",
+          name: "manhattan",
           args: {
             direction: "H",
           },
@@ -85,12 +89,12 @@ export default class BaseGraph {
             attrs: {
               line: {
                 stroke: "#1890ff",
-                strokeWidth: 1,
+                strokeWidth: 2,
                 targetMarker: {
                   name: "classic",
                   size: 8,
                 },
-                strokeDasharray: 0, //虚线
+                strokeDasharray: 3, //虚线
                 style: {
                   animation: "ant-line 30s infinite linear",
                 },
@@ -107,6 +111,7 @@ export default class BaseGraph {
           });
         },
       },
+      
       /** 对齐线 */
       snapline: {
         enabled: true,
