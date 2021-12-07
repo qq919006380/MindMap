@@ -1,4 +1,6 @@
 import { Graph, Shape } from "@antv/x6";
+import ports from "./ports"
+import rectNode from "../../components/mindMap/RectNode.vue";
 
 
 export default class BaseGraph {
@@ -12,6 +14,16 @@ export default class BaseGraph {
       ...defaultCfg,
       ...graphOptions,
     });
+
+    // 注册 vue 组件
+    Graph.registerVueComponent(
+      "rect-node-component",
+      {
+        template: `<rect-node></rect-node>`,
+        components: { rectNode },
+      },
+      true
+    );
     return this.graph
   }
 
@@ -21,7 +33,7 @@ export default class BaseGraph {
    * @memberof X6BaseGraph
    */
   static getDefaultCfg() {
-    
+
     const defaultCfg = {
       resizing: {
         enabled: true,
@@ -111,7 +123,7 @@ export default class BaseGraph {
           });
         },
       },
-      
+
       /** 对齐线 */
       snapline: {
         enabled: true,
@@ -147,7 +159,44 @@ export default class BaseGraph {
     return defaultCfg;
   }
 
-
+  static getCompontent() {
+    let rectNodeComponent = this.graph.createNode({
+      type: "rect",
+      shape: "vue-shape",
+      width: 140,
+      height: 60,
+      ports,
+      attrs: {
+        body: {
+          strokeWidth: 1,
+          stroke: '#5F95FF',
+          fill: '#EFF4FF',
+        },
+      },
+      data: {
+        text: ""
+      },
+      component: "rect-node-component",
+    });
+    let circleNodeComponent = this.graph.createNode({
+      shape: "vue-shape",
+      width: 60,
+      height: 60,
+      ports,
+      attrs: {
+        body: {
+          strokeWidth: 1,
+          stroke: '#5F95FF',
+          fill: '#EFF4FF',
+        },
+      },
+      data: {
+        text: ""
+      },
+      component: "rect-node-component",
+    });
+    return { rectNodeComponent, circleNodeComponent }
+  }
 
   /**
    * 画布缩放
