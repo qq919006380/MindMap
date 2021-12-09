@@ -1,6 +1,9 @@
 import { Graph, Shape } from "@antv/x6";
 import ports from "./ports"
 import rectNode from "../../components/mindMap/RectNode.vue";
+import circleNode from "../../components/mindMap/circleNode.vue";
+
+
 
 
 export default class BaseGraph {
@@ -15,12 +18,21 @@ export default class BaseGraph {
       ...graphOptions,
     });
 
-    // 注册 vue 组件
+    // 注册 vue 矩形组件
     Graph.registerVueComponent(
       "rect-node-component",
       {
         template: `<rect-node></rect-node>`,
         components: { rectNode },
+      },
+      true
+    );
+     // 注册 vue 圆组件
+     Graph.registerVueComponent(
+      "circle-node-component",
+      {
+        template: `<circle-node></circle-node>`,
+        components: { circleNode },
       },
       true
     );
@@ -178,7 +190,7 @@ export default class BaseGraph {
       },
       component: "rect-node-component",
     });
-    let circleNodeComponent = this.graph.createNode({
+    let squareNodeComponent = this.graph.createNode({
       shape: "vue-shape",
       width: 60,
       height: 60,
@@ -195,7 +207,25 @@ export default class BaseGraph {
       },
       component: "rect-node-component",
     });
-    return { rectNodeComponent, circleNodeComponent }
+    
+    let circleNodeComponent = this.graph.createNode({
+      shape: "vue-shape",
+      width: 60,
+      height: 60,
+      ports,
+      attrs: {
+        body: {
+          strokeWidth: 1,
+          stroke: '#5F95FF',
+          fill: '#EFF4FF',
+        },
+      },
+      data: {
+        text: ""
+      },
+      component: "circle-node-component",
+    });
+    return { rectNodeComponent, circleNodeComponent ,squareNodeComponent}
   }
 
   /**
