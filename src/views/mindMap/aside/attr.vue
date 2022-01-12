@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form label-position="right" label-width="70px" size="mini">
+    <el-form label-position="right" label-width="70px" size="small">
       <el-form-item label="文本">
         <el-input
           ref="divRef"
@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item label="宽">
         <el-input-number
-          :min="80"
+          :min="sizeMap.width"
           :max="800"
           controls-position="right"
           v-model.number="sizeMap.width"
@@ -22,7 +22,7 @@
       </el-form-item>
       <el-form-item label="高">
         <el-input-number
-          :min="60"
+          :min="sizeMap.height"
           :max="600"
           controls-position="right"
           v-model.number="sizeMap.height"
@@ -57,7 +57,7 @@
       </el-form-item>
       <el-form-item label="边框粗细">
         <el-slider
-          input-size="mini"
+          input-size="small"
           @input="notifyChange"
           :min="0"
           :max="10"

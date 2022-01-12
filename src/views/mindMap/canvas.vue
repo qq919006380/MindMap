@@ -70,7 +70,7 @@ onMounted(() => {
   position: fixed;
   z-index: 999;
   bottom: 20px;
-  right: 220px;
+  right: 320px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 

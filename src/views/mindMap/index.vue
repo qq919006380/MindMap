@@ -1,13 +1,11 @@
 <template>
+  <Header></Header>
   <el-container>
-    <el-header height="25px">
-      <Header></Header>
-    </el-header>
     <el-container>
       <el-main style="padding:0;">
         <Canvas></Canvas>
       </el-main>
-      <el-aside width="250px">
+      <el-aside>
         <Aside></Aside>
       </el-aside>
     </el-container>
