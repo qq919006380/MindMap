@@ -37,7 +37,7 @@ onMounted(() => {
     placeholder: '搜索组件名称',
     notFoundText: 'Not Found',
     stencilGraphWidth: 200,//模板画布宽度。
-    stencilGraphHeight: 280,//模板画布高度。
+    stencilGraphHeight: 480,//模板画布高度。
     stencilGraphPadding: 0,
     collapsable: true,
     groups: [
@@ -57,9 +57,10 @@ onMounted(() => {
 
     },
   })
-  let { rectNodeComponent,squareNodeComponent, circleNodeComponent } = BaseGraph.getCompontent()
+  let { rectNodeComponent, ellipseNodeComponent, heartNodeComponent, MusicNodeComponent, starNodeComponent, polygonNodeComponent } = BaseGraph.getCompontent()
   document.getElementById('stencil').appendChild(stencil.container)
-  stencil.load([rectNodeComponent, circleNodeComponent,squareNodeComponent], 'group1')
+  stencil.load([rectNodeComponent, ellipseNodeComponent, polygonNodeComponent, heartNodeComponent, starNodeComponent], 'group1')
+  stencil.load([MusicNodeComponent], 'group2')
 });
 </script>
 

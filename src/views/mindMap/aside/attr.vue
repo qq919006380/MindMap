@@ -4,7 +4,7 @@
       <el-form-item label="文本">
         <el-input
           ref="divRef"
-          v-model="dataMap.text"
+          v-model="attrsMap.text.textWrap.text"
           :rows="2"
           placeholder="Please input"
           @input="notifyChange"
@@ -56,7 +56,13 @@
         />
       </el-form-item>
       <el-form-item label="边框粗细">
-        <el-slider input-size='mini' @input='notifyChange' :min='0' :max='10' v-model="attrsMap.body.strokeWidth"></el-slider>
+        <el-slider
+          input-size="mini"
+          @input="notifyChange"
+          :min="0"
+          :max="10"
+          v-model="attrsMap.body.strokeWidth"
+        ></el-slider>
       </el-form-item>
     </el-form>
   </div>
@@ -72,10 +78,15 @@ let attrsMap = reactive({
     fill: null,
     strokeWidth: null
   },
+  text: {
+    textWrap: {
+      text: "",
+      width: -10
+    }
+  }
+
 })
-let dataMap = reactive({
-  text: ""
-})
+ 
 let sizeMap = reactive({
   width: 0,
   height: 0,
@@ -99,7 +110,6 @@ proxy.$EventBus.on("canvas-select-node", (node) => {
   selectNode = node
   window.n = node
   Object.assign(attrsMap, selectNode.getAttrs())//回显属性
-  Object.assign(dataMap, selectNode.getData())//回显数据
   Object.assign(sizeMap, selectNode.getSize())//回显尺寸
   sizeMap.zIndex = selectNode.zIndex
   divRef.value.focus()
@@ -110,9 +120,9 @@ proxy.$EventBus.on("canvas-select-node", (node) => {
  */
 function notifyChange() {
   selectNode.attr(attrsMap)
-  selectNode.setData(dataMap)
   selectNode.setSize(sizeMap.width, sizeMap.height)
   selectNode.zIndex = sizeMap.zIndex
+
 }
 </script>
 
