@@ -1,7 +1,9 @@
 <template>
   <div class="header-container">
     <el-row :gutter="20">
-      <el-col :span="8">logo</el-col>
+      <el-col :span="8">
+        <a href="https://github.com/qq919006380/MindMap">github</a>
+      </el-col>
       <el-col :span="16">
         <div class="btn-wrap">
           <el-button type="primary">
@@ -29,7 +31,7 @@ import { Grid, Upload } from '@element-plus/icons-vue'
 
 <style scoped>
 .header-container {
-  margin: 5px ;
+  margin: 5px;
 }
 .btn-wrap {
   text-align: right;
