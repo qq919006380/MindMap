@@ -1,5 +1,6 @@
 # mind-map
-[快速预览](https://qq919006380.github.io/MindMap)
+[快速预览](https://qq919006380.github.io/MindMap/#/mindMap)
+## 欢迎各种建议、issue、PR
 
 ## Project setup
 ```

@@ -1,0 +1,58 @@
+{
+  "id": "3139776",
+  "name": "思维导图",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4686546",
+      "name": "保存",
+      "font_class": "baocun",
+      "unicode": "ec09",
+      "unicode_decimal": 60425
+    },
+    {
+      "icon_id": "4937000",
+      "name": "github-fill",
+      "font_class": "github-fill",
+      "unicode": "e885",
+      "unicode_decimal": 59525
+    },
+    {
+      "icon_id": "5399558",
+      "name": "保存",
+      "font_class": "baocun1",
+      "unicode": "e936",
+      "unicode_decimal": 59702
+    },
+    {
+      "icon_id": "6879959",
+      "name": "快捷键-01",
+      "font_class": "kuaijiejian-",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "12314778",
+      "name": "导出",
+      "font_class": "daochu",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "15343421",
+      "name": "快捷键设置",
+      "font_class": "kuaijiejianshezhi",
+      "unicode": "ef4c",
+      "unicode_decimal": 61260
+    },
+    {
+      "icon_id": "17523066",
+      "name": "配置-快捷键",
+      "font_class": "peizhi-kuaijiejian",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    }
+  ]
+}
