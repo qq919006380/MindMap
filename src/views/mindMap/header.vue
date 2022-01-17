@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-github-fill" />
           </svg>
-          <span>star</span>
+          <span class="text">star</span>
         </span>
       </el-col>
       <el-col :span="16" class="menu-right">
@@ -14,21 +14,21 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kuaijiejianshezhi" />
           </svg>
-          快捷键
+          <span class="text">快捷键</span>
         </span>
 
         <span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-daochu" />
           </svg>
-          导出图片
+          <span class="text">导出图片</span>
         </span>
 
         <span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-baocun1" />
           </svg>
-          保存
+          <span class="text">保存</span>
         </span>
       </el-col>
     </el-row>
@@ -56,9 +56,15 @@ function openGithub() {
 .menu-right {
   text-align: right;
 }
-.menu-left {
-  & > span > * {
-    vertical-align: middle;
+.menu-left,
+.menu-right {
+  & > span {
+    display: inline-block;
+    margin-right: 10px;
+    .icon,
+    .text {
+      vertical-align: middle;
+    }
   }
   &:hover {
     cursor: pointer;
