@@ -9,10 +9,14 @@
 import { ref, onMounted, getCurrentInstance } from "vue";
 import { FunctionExt } from '@antv/x6'
 import BaseGraph from "./baseGraph";
+import hotkeys from 'hotkeys-js';
+
+
 const { proxy } = getCurrentInstance();
 
 const containerRef = ref(null);
 const miniMapContainerRef = ref(null);
+let getSelectedCells = null
 onMounted(() => {
 
   let graph = BaseGraph.init({
@@ -49,8 +53,34 @@ onMounted(() => {
     const ports = containerRef.value.querySelectorAll('.x6-port-body')
     // 添加连接点
     showPorts(ports, false)
-
   })
+
+  graph.bindKey('ctrl+c', () => {
+    const cells = graph.getSelectedCells()
+    if (cells.length) {
+      graph.copy(cells)
+    }
+    return false
+  })
+
+  graph.bindKey('ctrl+v', () => {
+    if (!graph.isClipboardEmpty()) {
+      const cells = graph.paste({ offset: 32 })
+      graph.cleanSelection()
+      graph.select(cells)
+    }
+    return false
+  })
+
+
+
+
+  hotkeys('alt+q', function (event, handler) {
+    // Prevent the default refresh event under WINDOWS system
+    event.preventDefault()
+    proxy.$EventBus.emit("aside-tabs-toggle");
+  });
+
   // 显示连线节点
   function showPorts(ports, show) {
     for (let i = 0, len = ports.length; i < len; i = i + 1) {

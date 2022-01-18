@@ -21,6 +21,9 @@ const { proxy } = getCurrentInstance();
 proxy.$EventBus.on("aside-tabs-activeName", (name) => {
   activeName.value = name;
 });
+proxy.$EventBus.on("aside-tabs-toggle", () => {
+  activeName.value = activeName.value == 'model' ? 'attr' : 'model'
+});
 
 let graph;
 let disabled = ref(false)

@@ -112,7 +112,7 @@ proxy.$EventBus.on("canvas-select-node", (node) => {
   Object.assign(attrsMap, selectNode.getAttrs())//回显属性
   Object.assign(sizeMap, selectNode.getSize())//回显尺寸
   sizeMap.zIndex = selectNode.zIndex
-  divRef.value.focus()
+  // divRef.value.focus()
   notifyChange()
 });
 /**

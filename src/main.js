@@ -8,6 +8,7 @@ import 'normalize.css'
 import '../public/iconfont/iconfont.js'
 import * as Icons from '@element-plus/icons-vue'
 import "@antv/x6-vue-shape";
+
 const emitter = mitt();
 const app = createApp(App)
 Object.keys(Icons).forEach(key => {

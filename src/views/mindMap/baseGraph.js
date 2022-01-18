@@ -86,8 +86,6 @@ export default class BaseGraph {
         pageBreak: false,
         pannable: true,
       },
-      selecting: true,
-      keyboard: true,
       /** 全局连线配置 */
       connecting: {
         connector: {
@@ -135,7 +133,6 @@ export default class BaseGraph {
           });
         },
       },
-
       /** 对齐线 */
       snapline: {
         enabled: true,
@@ -147,6 +144,10 @@ export default class BaseGraph {
         modifiers: ["ctrl", "meta"],
         minScale: 0.5,
         maxScale: 2,
+      },
+      selecting: {
+        enabled: true,
+        // showNodeSelectionBox: true,
       },
       keyboard: {
         enabled: true,
