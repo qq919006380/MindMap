@@ -10,7 +10,7 @@
         </span>
       </el-col>
       <el-col :span="16" class="menu-right">
-        <span>
+        <span @click="shortcutKeyShow = !shortcutKeyShow">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kuaijiejianshezhi" />
           </svg>
@@ -33,14 +33,19 @@
       </el-col>
     </el-row>
   </div>
+
+  <!-- 弹窗 -->
+  <ShortcutKeyDialog v-model="shortcutKeyShow"></ShortcutKeyDialog>
 </template>
 
 <script setup  >
-
+import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
+import { ref } from 'vue'
 
 function openGithub() {
   window.open('https://github.com/qq919006380/MindMap')
 }
+let shortcutKeyShow = ref(false)
 </script>
 
 <style scoped  lang="scss">
