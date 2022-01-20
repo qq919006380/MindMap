@@ -74,5 +74,7 @@ onMounted(() => {
 }
 .aside-template {
   padding: 0 0 0 15px;
+  display: inline-block;
+  width: 100%;
 }
 </style>

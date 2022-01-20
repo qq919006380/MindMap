@@ -126,5 +126,5 @@ function notifyChange() {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

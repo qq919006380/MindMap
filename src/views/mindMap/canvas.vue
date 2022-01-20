@@ -92,7 +92,7 @@ onMounted(() => {
 </script>
 
 
-<style>
+<style scoped>
 .container {
   height: calc(100vh - 45px);
 }
