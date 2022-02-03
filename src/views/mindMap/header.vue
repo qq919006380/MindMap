@@ -2,6 +2,13 @@
   <div class="header-container">
     <el-row :gutter="20">
       <el-col :span="8" class="menu-left">
+        <span @click="goHome">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-home" />
+          </svg>
+          <span class="text">首页</span>
+        </span>
+
         <span @click="openGithub">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-github-fill" />
@@ -42,8 +49,15 @@ import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
 import { ref } from 'vue'
 import { DataUri } from '@antv/x6'
 import BaseGraph from "./baseGraph";
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 
+function goHome() {
+  router.push({
+    name: 'Home'
+  })
+}
 function openGithub() {
   window.open('https://github.com/qq919006380/MindMap')
 }
