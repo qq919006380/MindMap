@@ -13,7 +13,7 @@
     </noscript>
 
     <div id="app"></div>
-
+    <% if (process.env.NODE_ENV === 'production' ) { %>
     <script>
       var _hmt = _hmt || [];
       (function () {
@@ -23,7 +23,7 @@
         s.parentNode.insertBefore(hm, s);
       })();
     </script>
-
+    <% } %>
     <!-- built files will be auto injected -->
   </body>
 </html>
