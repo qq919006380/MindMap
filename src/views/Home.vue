@@ -138,7 +138,7 @@ function pushMindMap() {
 </script>
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 780px) {
   .container {
     display: block !important;
     text-align: center !important;
