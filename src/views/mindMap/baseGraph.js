@@ -3,7 +3,27 @@ import ports from "./ports"
 // import rectNode from "../../components/mindMap/RectNode.vue";
 // import circleNode from "../../components/mindMap/circleNode.vue";
 
-
+// 配置所有线
+let EdgeAtr = {
+  attrs: {
+    line: {
+      stroke: '#1280FF', // 指定 path 元素的填充色
+      strokeDasharray: 3,
+      targetMarker: {
+        name: 'classic', // 实心箭头
+        size: 8
+      },
+      strokeWidth: 1,
+      style: {
+        animation: 'ant-line 200s infinite linear',
+      },
+    },
+  },
+  connector: 'rounded',//'normal',
+  router: {
+    name: "manhattan",
+  },
+}
 
 
 export default class BaseGraph {
@@ -88,18 +108,6 @@ export default class BaseGraph {
       },
       /** 全局连线配置 */
       connecting: {
-        connector: {
-          name: "rounded",
-          args: {
-            radius: 8,
-          },
-        },
-        router: {
-          name: "manhattan",
-          args: {
-            direction: "H",
-          },
-        },
         anchor: "center",
         connectionPoint: "anchor",
         snap: true, // 自动吸附
@@ -108,27 +116,8 @@ export default class BaseGraph {
         allowNode: false, // 是否允许边链接到节点（非节点上的链接桩）
         createEdge() {
           return new Shape.Edge({
-            attrs: {
-              line: {
-                stroke: "#1890ff",
-                strokeWidth: 2,
-                targetMarker: {
-                  name: "classic",
-                  size: 8,
-                },
-                strokeDasharray: 3, //虚线
-                style: {
-                  animation: "ant-line 30s infinite linear",
-                },
-              },
-            },
-            label: {
-              text: "",
-            },
+            ...EdgeAtr,
             connector: "normal",
-            router: {
-              name: "manhattan",
-            },
             zIndex: 0,
           });
         },
@@ -171,7 +160,66 @@ export default class BaseGraph {
     };
     return defaultCfg;
   }
+  static getGraphData() {
+    let data = this.graph.toJSON()
+    const model = {
+      nodes: [],
+      edges: []
+    };
+    let tmp;
+    if (data.cells) {
+      tmp = data.cells;
+    } else if (data.nodes || data.edges) {
+      tmp = [].concat(data.nodes, data.edges);
+    }
+    if (tmp) {
+      tmp.forEach((item) => {
+        if (item.shape !== "edge") {
+          model.nodes.push(item);
+        } else {
+          let sourceId = item.source;
+          let targetId = item.target;
+          model.edges.push({
+            source: sourceId,
+            target: targetId,
+            connector: {
+              name: "rounded",
+              args: {
+                radius: 8,
+              },
+            },
+            router: {
+              name: "manhattan",
+              args: {
+                direction: "H",
+              },
+            },
 
+
+
+            attrs: {
+              line: {
+                stroke: "#1890ff",
+                strokeWidth: 2,
+                targetMarker: {
+                  name: "classic",
+                  size: 8,
+                },
+                strokeDasharray: 3, //虚线
+                style: {
+                  animation: "ant-line 30s infinite linear",
+                },
+              },
+            },
+            router: {
+              name: "manhattan",
+            },
+          });
+        }
+      });
+    }
+    return model;
+  }
   static getCompontent() {
 
     // 矩形
@@ -308,7 +356,7 @@ export default class BaseGraph {
       },
 
     });
-    return { rectNodeComponent, ellipseNodeComponent, heartNodeComponent, MusicNodeComponent ,starNodeComponent,polygonNodeComponent}
+    return { rectNodeComponent, ellipseNodeComponent, heartNodeComponent, MusicNodeComponent, starNodeComponent, polygonNodeComponent }
   }
 
   /**

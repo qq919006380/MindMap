@@ -31,11 +31,18 @@
           <span class="text">导出图片</span>
         </span>
 
-        <span>
+        <span @click="save">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-baocun1" />
           </svg>
           <span class="text">保存</span>
+        </span>
+
+        <span @click="clear">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-baocun1" />
+          </svg>
+          <span class="text">清空</span>
         </span>
       </el-col>
     </el-row>
@@ -45,11 +52,69 @@
 </template>
 
 <script setup  >
+import { ElMessage, ElMessageBox } from 'element-plus'
+
 import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
 import { ref } from 'vue'
 import { DataUri } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import { useRouter } from 'vue-router'
+
+
+var obj = JSON.parse(localStorage.getItem('graphCacheData') || '{"nodes":[],"edges":[]}')
+if (obj && (obj.edges.length > 0 || obj.nodes.length > 0)) {
+  ElMessageBox.confirm(
+    '检测到有本地缓存数据，是否显示？',
+    'Warning',
+    {
+      confirmButtonText: '显示',
+      cancelButtonText: '清除',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      let graphCacheData = JSON.parse(localStorage.getItem('graphCacheData'))
+      BaseGraph.graph.fromJSON(graphCacheData)
+    })
+    .catch(() => {
+      BaseGraph.graph.fromJSON({})
+    })
+}
+
+function clear() {
+  ElMessageBox.confirm(
+    '是否确定清空当前画布和本地缓存的所有内容?',
+    'Warning',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      BaseGraph.graph.fromJSON({})
+      localStorage.setItem('graphCacheData', null)
+    })
+
+
+}
+function save() {
+  localStorage.setItem('graphCacheData', JSON.stringify(BaseGraph.getGraphData()))
+  ElMessage({
+    message: '保存成功，数据将缓存在浏览器本地！',
+    type: 'success',
+  })
+
+}
+
+
+/**
+   * 修改画布颜色
+   * @param {*} getColor 
+   */
+function handleColorChange(getColor) {
+  graph.drawBackground({ color: getColor });
+}
 
 const router = useRouter()
 
