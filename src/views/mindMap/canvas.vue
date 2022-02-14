@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <div class="mini-map-container" ref="miniMapContainerRef"></div>
     <div class="container" ref="containerRef"></div>
   </div>
@@ -10,6 +10,51 @@ import { ref, onMounted, getCurrentInstance } from "vue";
 import { FunctionExt } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import hotkeys from 'hotkeys-js';
+
+
+var obj = JSON.parse(localStorage.getItem('graphCacheData') || '{"nodes":[],"edges":[]}')
+let loading = ref(false)
+if (obj && (obj.edges.length > 0 || obj.nodes.length > 0)) {
+  loading.value = true
+  let graphCacheData = JSON.parse(localStorage.getItem('graphCacheData'))
+  setTimeout(() => {
+    BaseGraph.graph.fromJSON(graphCacheData)
+    loading.value = false
+  }, 800);
+}
+let registrationShortcuts = () => {
+  let graph = BaseGraph.graph
+  graph.bindKey('ctrl+c', () => {
+    const cells = graph.getSelectedCells()
+    if (cells.length) {
+      graph.copy(cells)
+    }
+    return false
+  })
+
+  graph.bindKey('ctrl+v', () => {
+    if (!graph.isClipboardEmpty()) {
+      const cells = graph.paste({ offset: 32 })
+      graph.cleanSelection()
+      graph.select(cells)
+    }
+    return false
+  })
+
+  hotkeys('alt+q', function (event, handler) {
+    event.preventDefault()
+    proxy.$EventBus.emit("aside-tabs-toggle");
+  });
+
+  hotkeys('ctrl+s', function (event, handler) {
+    event.preventDefault()
+    proxy.$EventBus.emit("save-canvas-data");
+  });
+  hotkeys('ctrl+d', function (event, handler) {
+    event.preventDefault()
+    proxy.$EventBus.emit("clear-canvas-data");
+  });
+}
 
 
 const { proxy } = getCurrentInstance();
@@ -55,32 +100,6 @@ onMounted(() => {
     showPorts(ports, false)
   })
 
-  graph.bindKey('ctrl+c', () => {
-    const cells = graph.getSelectedCells()
-    if (cells.length) {
-      graph.copy(cells)
-    }
-    return false
-  })
-
-  graph.bindKey('ctrl+v', () => {
-    if (!graph.isClipboardEmpty()) {
-      const cells = graph.paste({ offset: 32 })
-      graph.cleanSelection()
-      graph.select(cells)
-    }
-    return false
-  })
-
-
-
-
-  hotkeys('alt+q', function (event, handler) {
-    // Prevent the default refresh event under WINDOWS system
-    event.preventDefault()
-    proxy.$EventBus.emit("aside-tabs-toggle");
-  });
-
   // 显示连线节点
   function showPorts(ports, show) {
     for (let i = 0, len = ports.length; i < len; i = i + 1) {
@@ -88,7 +107,12 @@ onMounted(() => {
     }
   }
 
+  registrationShortcuts()
 });
+/**
+ * 注册快捷键
+ */
+
 </script>
 
 

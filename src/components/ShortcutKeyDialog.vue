@@ -19,6 +19,8 @@ let tableData = ref([
     { func: "切换右边栏", shortcut: 'alt+q' },
     { func: "复制", shortcut: "ctrl+c" },
     { func: "黏贴", shortcut: "ctrl+v" },
+    { func: "保存", shortcut: "ctrl+s" },
+    { func: "清除", shortcut: "ctrl+d" },
     { func: "放大缩小", shortcut: "按住ctrl+鼠标滚轮" }
 ])
 

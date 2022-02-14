@@ -55,31 +55,20 @@
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
-import { ref } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import { DataUri } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import { useRouter } from 'vue-router'
 
+const { proxy } = getCurrentInstance();
+proxy.$EventBus.on("save-canvas-data", () => {
+  save()
+});
+proxy.$EventBus.on("clear-canvas-data", () => {
+  clear()
+});
 
-var obj = JSON.parse(localStorage.getItem('graphCacheData') || '{"nodes":[],"edges":[]}')
-if (obj && (obj.edges.length > 0 || obj.nodes.length > 0)) {
-  ElMessageBox.confirm(
-    '检测到有本地缓存数据，是否显示？',
-    'Warning',
-    {
-      confirmButtonText: '显示',
-      cancelButtonText: '清除',
-      type: 'warning',
-    }
-  )
-    .then(() => {
-      let graphCacheData = JSON.parse(localStorage.getItem('graphCacheData'))
-      BaseGraph.graph.fromJSON(graphCacheData)
-    })
-    .catch(() => {
-      BaseGraph.graph.fromJSON({})
-    })
-}
+
 
 function clear() {
   ElMessageBox.confirm(
@@ -95,7 +84,6 @@ function clear() {
       BaseGraph.graph.fromJSON({})
       localStorage.setItem('graphCacheData', null)
     })
-
 
 }
 function save() {
@@ -168,8 +156,8 @@ let downloadImg = () => {
       vertical-align: middle;
     }
   }
-  &:hover {
-    cursor: pointer;
+  &>span:hover {
+   cursor: pointer;
   }
 }
 .menu-right .text {
