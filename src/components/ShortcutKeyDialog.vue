@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" title="快捷键" width="30%">
+    <el-dialog v-model="dialogVisible" title="快捷键" width="400px">
         <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="func" label="功能" />
             <el-table-column prop="shortcut" label="快捷键" />
