@@ -6,7 +6,7 @@
         </el-table>
     </el-dialog>
 </template>
-<script    setup="props, context">
+<script setup="props, context">
 import { defineEmits, defineProps, watch, toRefs, ref } from 'vue'
 const props = defineProps({
     modelValue: Boolean

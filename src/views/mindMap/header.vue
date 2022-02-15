@@ -17,6 +17,13 @@
         </span>
       </el-col>
       <el-col :span="16" class="menu-right">
+        <span @click="configShow = !configShow">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-kuaijiejianshezhi" />
+          </svg>
+          <span class="text">设置</span>
+        </span>
+
         <span @click="shortcutKeyShow = !shortcutKeyShow">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-kuaijiejianshezhi" />
@@ -49,17 +56,21 @@
   </div>
   <!-- 弹窗 -->
   <ShortcutKeyDialog v-model="shortcutKeyShow"></ShortcutKeyDialog>
+  <ConfigDialog v-model="configShow"></ConfigDialog>
 </template>
 
 <script setup  >
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
+import ConfigDialog from '../../components/configDialog.vue'
 import { getCurrentInstance, ref } from 'vue'
 import { DataUri } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import { useRouter } from 'vue-router'
 
+let shortcutKeyShow = ref(false)
+let configShow = ref(false)
 const { proxy } = getCurrentInstance();
 proxy.$EventBus.on("save-canvas-data", () => {
   save()
@@ -67,8 +78,6 @@ proxy.$EventBus.on("save-canvas-data", () => {
 proxy.$EventBus.on("clear-canvas-data", () => {
   clear()
 });
-
-
 
 function clear() {
   ElMessageBox.confirm(
@@ -96,13 +105,7 @@ function save() {
 }
 
 
-/**
-   * 修改画布颜色
-   * @param {*} getColor 
-   */
-function handleColorChange(getColor) {
-  graph.drawBackground({ color: getColor });
-}
+
 
 const router = useRouter()
 
@@ -114,7 +117,6 @@ function goHome() {
 function openGithub() {
   window.open('https://github.com/qq919006380/MindMap')
 }
-let shortcutKeyShow = ref(false)
 
 
 let downloadImg = () => {
@@ -156,8 +158,8 @@ let downloadImg = () => {
       vertical-align: middle;
     }
   }
-  &>span:hover {
-   cursor: pointer;
+  & > span:hover {
+    cursor: pointer;
   }
 }
 .menu-right .text {

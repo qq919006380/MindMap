@@ -1,30 +1,16 @@
 import { Graph, Shape } from "@antv/x6";
 import ports from "./ports"
+import { EdgeAtr, gridAtr } from "../mindMap/globalCfg"
 // import rectNode from "../../components/mindMap/RectNode.vue";
 // import circleNode from "../../components/mindMap/circleNode.vue";
 
-// 配置所有线
-let EdgeAtr = {
-  attrs: {
-    line: {
-      stroke: '#1280FF', // 指定 path 元素的填充色
-      strokeDasharray: 3,
-      targetMarker: {
-        name: 'classic', // 实心箭头
-        size: 8
-      },
-      strokeWidth: 1,
-      style: {
-        animation: 'ant-line 200s infinite linear',
-      },
-    },
-  },
-  connector: 'rounded',//'normal',
-  router: {
-    name: "manhattan",
-  },
-}
+// 方法一
+// 一、判断是否有缓存配置，有的话就使用，没有的话就获取当前配置
+// 二、回显配置
 
+
+// 方法二
+// 一、抽离全局配置，单独放在一个文件
 
 export default class BaseGraph {
   // public graph!: Graph;
@@ -81,20 +67,7 @@ export default class BaseGraph {
       },
       // 网格
       grid: {
-        size: 10,
-        visible: true,
-        type: "doubleMesh",
-        args: [
-          {
-            color: "#E7E8EA",
-            thickness: 1,
-          },
-          {
-            color: "#CBCED3",
-            thickness: 1,
-            factor: 5,
-          },
-        ],
+        ...gridAtr
       },
       background: {
         color: "#F5F7FA",
