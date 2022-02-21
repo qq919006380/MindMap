@@ -51,6 +51,8 @@
           </svg>
           <span class="text">清空</span>
         </span>
+
+        <!-- <span @click="test">xxxx{{ products }}</span> -->
       </el-col>
     </el-row>
   </div>
@@ -64,14 +66,27 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 
 import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
 import ConfigDialog from '../../components/configDialog.vue'
-import { getCurrentInstance, ref } from 'vue'
+import { getCurrentInstance, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { DataUri } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import { useRouter } from 'vue-router'
 
+const store = useStore()
+
 let shortcutKeyShow = ref(false)
 let configShow = ref(false)
 const { proxy } = getCurrentInstance();
+
+// function test() {
+//   store.commit({
+//     type: 'editor/increment',
+//     amount: 10
+//   })
+//   console.log(store.state.editor.count)
+// }
+// const products = computed(() => store.getters['editor/doneTodos'])
+
 proxy.$EventBus.on("save-canvas-data", () => {
   save()
 });
