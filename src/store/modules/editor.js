@@ -15,7 +15,6 @@ let mutations = {
     },
 
     setCurEditData(state, { data }) {
-        console.log('data', data)
         Object.assign(state.curEditData, data)
     },
 }
