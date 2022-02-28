@@ -40,7 +40,7 @@
             <div>音乐</div>
         </a>
     </div>
-    <svg>
+    <svg style="display: none;">
         <symbol id="rectNodeComponent" viewBox="0 0 60 60">
             <rect fill="#EFF4FF" stroke="#5F95FF" stroke-width="1" width="60" height="60" />
         </symbol>
@@ -118,6 +118,7 @@ function startDrag(e) {
 
 </script>
 <style scoped  lang="scss">
+
 .stencil-container {
     width: 100%;
     text-align: center;

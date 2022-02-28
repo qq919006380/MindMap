@@ -7,7 +7,7 @@
       <el-aside width="200px">
         <stencil></stencil>
       </el-aside>
-      <el-main>
+      <el-main class="el-main">
         <Canvas></Canvas>
       </el-main>
     </el-container>
@@ -49,6 +49,11 @@ let stencilDrawer = ref(true)
 }
 </style>
 <style scoped  lang="scss">
+.el-main {
+    padding: 0;
+    // overflow: hidden;
+    height: calc(100vh - 80px);
+}
 .icon-left,
 .icon-right {
   width: 25px;
