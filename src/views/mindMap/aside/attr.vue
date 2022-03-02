@@ -45,11 +45,12 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive, ref, computed } from "vue";
+import { getCurrentInstance, reactive, ref, computed, watch } from "vue";
 import { useStore } from 'vuex'
 const store = useStore()
 const divRef = ref()
-let selectNode = ref({})
+const selectNode = computed(() => store.state.editor.canvasTarget)
+
 // 渲染form-item List
 let attrsMap = reactive({
   textVal: { key: 'textVal', name: '内容', type: 'TextArea' },
@@ -76,7 +77,7 @@ let attrsList = computed(() => {
   return arr
 })
 let editData = ref({})
-const { curEditData } = { ...store.state.editor }
+const curEditData = computed(() => store.state.editor.curEditData)
 
 const predefineColors = ref([
   '#ff4500',
@@ -90,25 +91,7 @@ const predefineColors = ref([
 /**
  * 节点回显值
  */
-const { proxy } = getCurrentInstance();
-proxy.$EventBus.on("canvas-select-node", (node) => {
-  selectNode.value = node
-  let nodeAttrs = selectNode.value.getAttrs()
-  let nodeSize = selectNode.value.getSize()
-  store.commit({
-    type: 'editor/setCurEditData',
-    data: JSON.parse(JSON.stringify({
-      textVal: nodeAttrs.text.textWrap.text,
-      w: nodeSize.width,
-      h: nodeSize.height,
-      zIndex: selectNode.value.zIndex,
-      fill: nodeAttrs.body.fill,
-      stroke: nodeAttrs.body.stroke,
-      strokeWidth: nodeAttrs.body.strokeWidth,
-    }))
-  })
-  Object.assign(editData.value, curEditData)
-});
+Object.assign(editData.value, curEditData.value)
 /**
  * 节点设置值
  */

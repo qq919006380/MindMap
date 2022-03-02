@@ -7,10 +7,13 @@
 
 <script setup>
 import { ref, onMounted, getCurrentInstance } from "vue";
+import { useStore } from 'vuex'
+
 import { FunctionExt } from '@antv/x6'
 import BaseGraph from "./baseGraph";
 import hotkeys from 'hotkeys-js';
 
+const store = useStore()
 
 var obj = JSON.parse(localStorage.getItem('graphCacheData') || '{"nodes":[],"edges":[]}')
 let loading = ref(false)
@@ -41,10 +44,7 @@ let registrationShortcuts = () => {
     return false
   })
 
-  hotkeys('alt+q', function (event, handler) {
-    event.preventDefault()
-    proxy.$EventBus.emit("aside-tabs-toggle");
-  });
+
 
   hotkeys('ctrl+s', function (event, handler) {
     event.preventDefault()
@@ -61,7 +61,6 @@ const { proxy } = getCurrentInstance();
 
 const containerRef = ref(null);
 const miniMapContainerRef = ref(null);
-let getSelectedCells = null
 onMounted(() => {
 
   let graph = BaseGraph.init({
@@ -73,21 +72,51 @@ onMounted(() => {
       container: miniMapContainerRef.value,
     },
   });
-
+  function setCurEditData(node) {
+    let nodeAttrs = node.getAttrs()
+    let nodeSize = node.getSize()
+    store.commit({
+      type: 'editor/setCurEditData',
+      data: JSON.parse(JSON.stringify({
+        textVal: nodeAttrs.text.textWrap.text,
+        w: nodeSize.width,
+        h: nodeSize.height,
+        zIndex: node.zIndex,
+        fill: nodeAttrs.body.fill,
+        stroke: nodeAttrs.body.stroke,
+        strokeWidth: nodeAttrs.body.strokeWidth,
+      }))
+    })
+  }
   graph.on("node:click", ({ node, e }) => {
-    proxy.$EventBus.emit("aside-tabs-activeName", "attr");
-    proxy.$EventBus.emit("canvas-select-node", node);
+    store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
+    store.commit('editor/setCanvasTarget', node)
+    setCurEditData(node)
+    // proxy.$EventBus.emit("update-canvasTarget-data", node);
+
   });
   graph.on("node:added", ({ node, e }) => {
-    proxy.$EventBus.emit("aside-tabs-activeName", "attr");
-    proxy.$EventBus.emit("canvas-select-node", node);
-  });
-  graph.on("blank:click", () => {
-    proxy.$EventBus.emit("aside-tabs-activeName", "model");
+    store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
+    store.commit('editor/setCanvasTarget', node)
+    setCurEditData(node)
+    // proxy.$EventBus.emit("update-canvasTarget-data", node);
+
   });
   graph.on("node:resizing", ({ node }) => {
-    proxy.$EventBus.emit("canvas-select-node", node);
+    setCurEditData(node)
+    store.commit('editor/setCanvasTarget', node)
+    // proxy.$EventBus.emit("update-canvasTarget-data", node);
   });
+  graph.on('edge:click', ({ edge }) => {
+    store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
+    // store.commit('editor/setCanvasTarget', node)
+    //  setCurEditData(edge)
+    // proxy.$EventBus.emit("update-canvasTarget-data", edge);
+  })
+  graph.on("blank:click", () => {
+    store.commit('editor/setAsideDrawerObj', { status: false, type: null })
+  });
+
 
   graph.on('node:mouseenter', FunctionExt.debounce(({ node }) => {
     // 添加连接点
@@ -118,7 +147,7 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  height: calc(100vh - 45px);
+  height: calc(100vh - 60px);
 }
 .mini-map-container {
   position: fixed;

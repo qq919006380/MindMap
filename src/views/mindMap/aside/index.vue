@@ -1,26 +1,18 @@
 <template>
   <div class="aside-template">
-     <attr></attr>
+    <attr v-if="type == 'attr'"></attr>
+    <edge v-else-if="type == 'edge'"></edge>
+    <div v-else>暂无属性面板</div>
   </div>
 </template>
 
 <script setup>
-import { getCurrentInstance, ref } from "vue";
+import { computed } from "vue";
 import attr from "./attr.vue";
-let activeName = ref("model");
-const { proxy } = getCurrentInstance();
-proxy.$EventBus.on("aside-tabs-activeName", (name) => {
-  activeName.value = name;
-});
-proxy.$EventBus.on("aside-tabs-toggle", () => {
-  activeName.value = activeName.value == 'model' ? 'attr' : 'model'
-});
-
-let disabled = ref(false)
-
-
-
-
+import edge from "./edge.vue"
+import { useStore } from "vuex";
+const store = useStore()
+const type = computed(() => store.state.editor.asideDrawerObj.type)
 
 </script>
 

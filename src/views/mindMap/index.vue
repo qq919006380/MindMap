@@ -18,18 +18,17 @@
     :size="300"
     :modal="false"
     :close-on-click-modal="false"
-    v-model="attrDrawer"
-    title="节点属性"
+    :before-close="() => { setAsideDrawerObj(false) }"
+    v-model="status"
+    :title="type == 'attr' ? '节点属性' : '线属性'"
     direction="rtl"
   >
     <Aside></Aside>
   </el-drawer>
 
-  <el-icon class="icon-left" @click="attrDrawer = true">
+  <el-icon class="icon-left" @click="setAsideDrawerObj(true)">
+    {{ status }}
     <d-arrow-left />
-  </el-icon>
-  <el-icon class="icon-right" @click="stencilDrawer = true">
-    <d-arrow-right />
   </el-icon>
 </template>
 <script setup>
@@ -38,10 +37,20 @@ import Header from "./header";
 import stencil from "./aside/stencil.vue"
 
 import Aside from "./aside/index.vue";
-import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore()
+const status = computed(() => store.state.editor.asideDrawerObj.status)
+const type = computed(() => store.state.editor.asideDrawerObj.type)
 
-let attrDrawer = ref(false)
-let stencilDrawer = ref(true)
+function setAsideDrawerObj(val) {
+  store.commit('editor/setAsideDrawerObj', {
+    type: 'attr',
+    status: val
+  })
+}
+
+
 </script>
 <style>
 .el-drawer-modal-class {
@@ -50,12 +59,9 @@ let stencilDrawer = ref(true)
 </style>
 <style scoped  lang="scss">
 .el-main {
-    padding: 0;
-    // overflow: hidden;
-    height: calc(100vh - 80px);
+  padding: 0;
 }
-.icon-left,
-.icon-right {
+.icon-left {
   width: 25px;
   border: 1px solid #999;
   padding: 12px 0;
@@ -64,18 +70,12 @@ let stencilDrawer = ref(true)
   bottom: 50%;
   cursor: pointer;
 }
-.icon-left:hover,
-.icon-right:hover {
+.icon-left:hover {
   color: #409eff;
 }
 .icon-left {
   right: 0;
   border-radius: 50px 0px 0px 50px;
   border-right: none;
-}
-.icon-right {
-  left: 0;
-  border-radius: 0% 50px 50px 0%;
-  border-left: none;
 }
 </style>

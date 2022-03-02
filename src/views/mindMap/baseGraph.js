@@ -53,6 +53,7 @@ export default class BaseGraph {
   static getDefaultCfg() {
 
     const defaultCfg = {
+      autoResize: true,
       resizing: {
         enabled: true,
         orthogonal: false,
@@ -64,6 +65,7 @@ export default class BaseGraph {
 
         minHeight: 60,
         maxHeight: 600,
+
       },
       // 网格
       grid: {

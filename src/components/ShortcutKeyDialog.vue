@@ -16,7 +16,6 @@ const emit = defineEmits(["update:modelValue"]);
 let dialogVisible = ref(modelValue.value)
 
 let tableData = ref([
-    { func: "切换右边栏", shortcut: 'alt+q' },
     { func: "复制", shortcut: "ctrl+c" },
     { func: "黏贴", shortcut: "ctrl+v" },
     { func: "保存", shortcut: "ctrl+s" },
