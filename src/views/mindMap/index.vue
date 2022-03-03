@@ -15,8 +15,8 @@
 
   <el-drawer
     modal-class="el-drawer-modal-class"
-    :open-delay="300"
-    :close-delay="300"
+    :open-delay="0"
+    :close-delay="0"
     :size="300"
     :modal="false"
     :close-on-click-modal="false"

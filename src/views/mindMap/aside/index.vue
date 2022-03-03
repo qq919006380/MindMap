@@ -2,7 +2,6 @@
   <div class="aside-template">
     <attr v-if="type == 'attr'"></attr>
     <edge v-else-if="type == 'edge'"></edge>
-    <div v-else>暂无属性面板</div>
   </div>
 </template>
 

@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive, ref, computed, watchEffect, watch } from "vue";
+import { getCurrentInstance, reactive, ref, computed } from "vue";
 import { useStore } from 'vuex'
 const store = useStore()
 const divRef = ref()
@@ -61,14 +61,15 @@ let attrsMap = reactive({
   stroke: { key: 'stroke', name: '边框颜色', type: "Color" },
   strokeWidth: { key: 'strokeWidth', name: '边框粗细', type: "Slider" },
 })
-let shapeAttrMap = {
-  rect: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
-  shape: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
-  ellipse: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
-  polygon: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
-  path: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth']
-}
+
 let attrsList = computed(() => {
+  let shapeAttrMap = {
+    rect: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
+    shape: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
+    ellipse: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
+    polygon: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
+    path: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth']
+  }
   let curKey = shapeAttrMap[selectNode.value.shape] || []
   let arr = []
   curKey.forEach(key => {

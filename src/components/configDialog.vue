@@ -2,7 +2,7 @@
     <el-dialog v-model="dialogVisible" title="设置" width="400px">
         <el-tabs v-model="activeName" class="demo-tabs">
             <el-tab-pane label="全局配置" name="globalConfig">
-                <el-form ref="formRef" :model="form" label-width="120px">
+                <el-form ref="formRef"   label-width="120px">
                     <el-form-item label="网格类型">
                         <el-select v-model="state.type" @change="handleConfigChange">
                             <el-option label="点状网格" value="dot"></el-option>

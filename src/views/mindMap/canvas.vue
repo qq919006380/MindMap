@@ -72,6 +72,16 @@ onMounted(() => {
       container: miniMapContainerRef.value,
     },
   });
+  function setCurEditData2(edge) {
+    window.e=edge
+    store.commit({
+      type: 'editor/setCurEditData',
+      data: JSON.parse(JSON.stringify({
+        stroke: edge.attrs.line.stroke,
+        strokeWidth: edge.attrs.line.strokeWidth
+      }))
+    })
+  }
   function setCurEditData(node) {
     let nodeAttrs = node.getAttrs()
     let nodeSize = node.getSize()
@@ -116,7 +126,7 @@ onMounted(() => {
   graph.on('edge:click', ({ edge }) => {
     store.commit('editor/setAsideDrawerObj', { status: true, type: 'edge' })
     store.commit('editor/setCanvasTarget', edge)
-    // setCurEditData(edge)
+    setCurEditData2(edge)
     setTimeout(() => {
       proxy.$EventBus.emit("click-canvas-target", edge);
     }, 0);
