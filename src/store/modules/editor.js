@@ -24,7 +24,6 @@ let mutations = {
     },
     setAsideDrawerObj(state, obj) {
         Object.assign(state.asideDrawerObj, obj)
-        console.log(state)
     },
     setCanvasTarget(state,data){
         state.canvasTarget=data

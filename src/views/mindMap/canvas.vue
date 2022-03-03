@@ -92,26 +92,34 @@ onMounted(() => {
     store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
     store.commit('editor/setCanvasTarget', node)
     setCurEditData(node)
-    // proxy.$EventBus.emit("update-canvasTarget-data", node);
+    setTimeout(() => {
+      proxy.$EventBus.emit("click-canvas-target", node);
+    }, 0);
 
   });
   graph.on("node:added", ({ node, e }) => {
     store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
     store.commit('editor/setCanvasTarget', node)
     setCurEditData(node)
-    // proxy.$EventBus.emit("update-canvasTarget-data", node);
+    setTimeout(() => {
+      proxy.$EventBus.emit("click-canvas-target", node);
+    }, 0);
 
   });
   graph.on("node:resizing", ({ node }) => {
     setCurEditData(node)
     store.commit('editor/setCanvasTarget', node)
-    // proxy.$EventBus.emit("update-canvasTarget-data", node);
+    setTimeout(() => {
+      proxy.$EventBus.emit("click-canvas-target", node);
+    }, 0);
   });
   graph.on('edge:click', ({ edge }) => {
-    store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
-    // store.commit('editor/setCanvasTarget', node)
-    //  setCurEditData(edge)
-    // proxy.$EventBus.emit("update-canvasTarget-data", edge);
+    store.commit('editor/setAsideDrawerObj', { status: true, type: 'edge' })
+    store.commit('editor/setCanvasTarget', edge)
+    // setCurEditData(edge)
+    setTimeout(() => {
+      proxy.$EventBus.emit("click-canvas-target", edge);
+    }, 0);
   })
   graph.on("blank:click", () => {
     store.commit('editor/setAsideDrawerObj', { status: false, type: null })

@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive, ref, computed, watch } from "vue";
+import { getCurrentInstance, reactive, ref, computed, watchEffect, watch } from "vue";
 import { useStore } from 'vuex'
 const store = useStore()
 const divRef = ref()
@@ -88,10 +88,14 @@ const predefineColors = ref([
   '#1e90ff',
   '#c71585',
 ])
+const { proxy } = getCurrentInstance();
 /**
  * 节点回显值
  */
-Object.assign(editData.value, curEditData.value)
+proxy.$EventBus.on("click-canvas-target", () => {
+  Object.assign(editData.value, curEditData.value)
+});
+
 /**
  * 节点设置值
  */

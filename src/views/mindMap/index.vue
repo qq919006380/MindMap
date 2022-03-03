@@ -15,6 +15,8 @@
 
   <el-drawer
     modal-class="el-drawer-modal-class"
+    :open-delay="300"
+    :close-delay="300"
     :size="300"
     :modal="false"
     :close-on-click-modal="false"
@@ -40,9 +42,16 @@ import Aside from "./aside/index.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 const store = useStore()
-const status = computed(() => store.state.editor.asideDrawerObj.status)
-const type = computed(() => store.state.editor.asideDrawerObj.type)
+const status = computed({
+  set(value) {
+    setAsideDrawerObj(value)
+  },
+  get() {
+    return store.state.editor.asideDrawerObj.status
 
+  }
+})
+const type = computed(() => store.state.editor.asideDrawerObj.type)
 function setAsideDrawerObj(val) {
   store.commit('editor/setAsideDrawerObj', {
     type: 'attr',
