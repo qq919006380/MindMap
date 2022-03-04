@@ -1,19 +1,17 @@
 <template>
-  <el-container>
-    <el-header>
-      <Header></Header>
-    </el-header>
-    <el-container>
-      <el-aside width="200px">
-        <stencil></stencil>
-      </el-aside>
-      <el-main class="el-main">
-        <Canvas></Canvas>
-      </el-main>
-    </el-container>
-  </el-container>
+  <Header></Header>
+  <div class="container">
+    <div class="aside">
+      <stencil></stencil>
+    </div>
+    <div class="content">
+      <Canvas></Canvas>
+    </div>
+  </div>
 
   <el-drawer
+    :append-to-body="true"
+    :lock-scroll="false"
     modal-class="el-drawer-modal-class"
     :open-delay="0"
     :close-delay="0"
@@ -61,12 +59,44 @@ function setAsideDrawerObj(val) {
 
 
 </script>
+
 <style>
 .el-drawer-modal-class {
-  position: unset !important;
+  inset: 0px 0px 0px calc(100vw - 300px) !important;
+}
+
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #b3d8ff;
+}
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ededed;
 }
 </style>
 <style scoped  lang="scss">
+.container {
+  display: flex;
+  .aside {
+    width: 200px;
+  }
+  .content {
+    width: calc(100% - 200px);
+  }
+}
+
+.el-container {
+  height: calc(100vh - 60px);
+}
 .el-main {
   padding: 0;
 }

@@ -73,7 +73,7 @@ onMounted(() => {
     },
   });
   function setCurEditData2(edge) {
-    window.e=edge
+    window.e = edge
     store.commit({
       type: 'editor/setCurEditData',
       data: JSON.parse(JSON.stringify({
@@ -171,7 +171,7 @@ onMounted(() => {
   position: fixed;
   z-index: 999;
   bottom: 20px;
-  right: 320px;
+  right: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 

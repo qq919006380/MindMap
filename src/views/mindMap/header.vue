@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <el-row :gutter="20">
+    <el-row>
       <el-col :span="8" class="menu-left">
         <span @click="goHome">
           <svg class="icon" aria-hidden="true">
@@ -184,7 +184,9 @@ let downloadImg = () => {
   color: #333;
 }
 .header-container {
-  margin: 5px;
+  box-shadow: 0 2px 8px #f0f1f2;
+  padding: 16px 5px;
+  margin-bottom: 4px;
 }
 .btn-wrap {
   text-align: right;
