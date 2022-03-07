@@ -118,8 +118,8 @@ function startDrag(e) {
 
 </script>
 <style scoped  lang="scss">
-
 .stencil-container {
+    padding: 20px 0;
     width: 100%;
     text-align: center;
     color: #999;

@@ -18,7 +18,6 @@ let mutations = {
     increment(state, payload) {
         state.count = payload.amount
     },
-
     setCurEditData(state, { data }) {
         Object.assign(state.curEditData, data)
     },
