@@ -26,10 +26,10 @@
     <Aside></Aside>
   </el-drawer>
 
-  <el-icon class="icon-left" @click="setAsideDrawerObj(true)">
+  <!-- <el-icon class="icon-left" @click="setAsideDrawerObj(true)">
     {{ status }}
     <d-arrow-left />
-  </el-icon>
+  </el-icon> -->
 </template>
 <script setup>
 import Canvas from "./canvas";

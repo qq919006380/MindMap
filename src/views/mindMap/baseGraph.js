@@ -152,43 +152,15 @@ export default class BaseGraph {
         if (item.shape !== "edge") {
           model.nodes.push(item);
         } else {
+          console.log(item)
           let sourceId = item.source;
           let targetId = item.target;
           model.edges.push({
             source: sourceId,
             target: targetId,
-            connector: {
-              name: "rounded",
-              args: {
-                radius: 8,
-              },
-            },
-            router: {
-              name: "manhattan",
-              args: {
-                direction: "H",
-              },
-            },
-
-
-
-            attrs: {
-              line: {
-                stroke: "#1890ff",
-                strokeWidth: 2,
-                targetMarker: {
-                  name: "classic",
-                  size: 8,
-                },
-                strokeDasharray: 3, //虚线
-                style: {
-                  animation: "ant-line 30s infinite linear",
-                },
-              },
-            },
-            router: {
-              name: "manhattan",
-            },
+            connector: item.connector,
+            attrs: item.attrs,
+            router: item.router,
           });
         }
       });

@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-model="dialogVisible" title="设置" width="400px">
+    <el-dialog  :modal="false" v-model="dialogVisible" title="设置" width="400px">
         <el-tabs v-model="activeName" class="demo-tabs">
             <el-tab-pane label="全局配置" name="globalConfig">
                 <el-form ref="formRef"   label-width="120px">
