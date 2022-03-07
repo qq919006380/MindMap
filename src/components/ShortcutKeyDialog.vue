@@ -1,5 +1,5 @@
 <template>
-    <el-dialog  :modal="false" v-model="dialogVisible" title="快捷键" width="400px">
+    <el-dialog :modal="false" v-model="dialogVisible" title="快捷键" width="400px">
         <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="func" label="功能" />
             <el-table-column prop="shortcut" label="快捷键" />
@@ -20,6 +20,8 @@ let tableData = ref([
     { func: "黏贴", shortcut: "ctrl+v" },
     { func: "保存", shortcut: "ctrl+s" },
     { func: "清除", shortcut: "ctrl+d" },
+    { func: "撤销", shortcut: "ctrl+z" },
+    { func: "重做", shortcut: "ctrl+y" },
     { func: "放大缩小", shortcut: "按住ctrl+鼠标滚轮" }
 ])
 

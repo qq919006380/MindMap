@@ -44,8 +44,23 @@ let registrationShortcuts = () => {
     return false
   })
 
-
-
+  let history = graph.history
+  let state = {
+    canRedo: false,
+    canUndo: false,
+  }
+  history.on('change', () => {
+    state = {
+      canRedo: history.canRedo(),
+      canUndo: history.canUndo(),
+    }
+  })
+  graph.bindKey('ctrl+z', () => {
+    history.undo()
+  })
+  graph.bindKey('ctrl+y', () => {
+    history.redo()
+  })
   hotkeys('ctrl+s', function (event, handler) {
     event.preventDefault()
     proxy.$EventBus.emit("save-canvas-data");
