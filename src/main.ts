@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import store from '../src/store'
+import store from './store'
 import App from "./App.vue";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -13,8 +13,9 @@ import "@antv/x6-vue-shape";
 
 const emitter = mitt();
 const app = createApp(App);
+console.log(Icons)
 Object.keys(Icons).forEach((key) => {
-  app.component(key, Icons[key]);
+    app.component(key, Icons[key as keyof typeof Icons]);
 });
 app.config.globalProperties.$EventBus = emitter;
 app.use(router);
