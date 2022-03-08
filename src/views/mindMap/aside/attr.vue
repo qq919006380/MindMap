@@ -52,7 +52,7 @@ const divRef = ref()
 const selectNode = computed(() => store.state.editor.canvasTarget)
 
 // 渲染form-item List
-let attrsMap = reactive({
+let attrsMap =  {
   textVal: { key: 'textVal', name: '内容', type: 'TextArea' },
   w: { key: 'w', name: '宽', type: 'Number', col: 12 },
   h: { key: 'h', name: '高', type: 'Number', col: 12 },
@@ -60,7 +60,7 @@ let attrsMap = reactive({
   fill: { key: 'fill', name: '填充颜色', type: "Color" },
   stroke: { key: 'stroke', name: '边框颜色', type: "Color" },
   strokeWidth: { key: 'strokeWidth', name: '边框粗细', type: "Slider" },
-})
+}
 
 let attrsList = computed(() => {
   let shapeAttrMap = {
