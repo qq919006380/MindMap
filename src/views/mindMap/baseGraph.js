@@ -4,14 +4,6 @@ import { EdgeAtr, gridAtr } from "../mindMap/globalCfg"
 // import rectNode from "../../components/mindMap/RectNode.vue";
 // import circleNode from "../../components/mindMap/circleNode.vue";
 
-// 方法一
-// 一、判断是否有缓存配置，有的话就使用，没有的话就获取当前配置
-// 二、回显配置
-
-
-// 方法二
-// 一、抽离全局配置，单独放在一个文件
-
 export default class BaseGraph {
   // public graph!: Graph;
 
