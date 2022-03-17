@@ -10,7 +10,7 @@ import { ref, onMounted, getCurrentInstance } from "vue";
 import { useStore } from 'vuex'
 
 import { FunctionExt } from '@antv/x6'
-import BaseGraph from "./baseGraph";
+import BaseGraph from "./graph/baseGraph";
 import hotkeys from 'hotkeys-js';
 
 const store = useStore()

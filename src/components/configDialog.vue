@@ -72,8 +72,8 @@
 </template>
 <script setup="props, context">
 import { defineEmits, defineProps, watch, toRefs, ref, reactive } from 'vue'
-import BaseGraph from "../views/mindMap/baseGraph";
-import { gridAtr } from "../views/mindMap/globalCfg.js"
+import BaseGraph from "../views/mindMap/graph/baseGraph";
+import { gridAtr } from "../views/mindMap/graph/globalCfg.js"
 
 const props = defineProps({
     modelValue: Boolean

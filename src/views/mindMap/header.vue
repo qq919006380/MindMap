@@ -69,7 +69,7 @@ import ConfigDialog from '../../components/configDialog.vue'
 import { getCurrentInstance, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { DataUri } from '@antv/x6'
-import BaseGraph from "./baseGraph";
+import BaseGraph from "./graph/baseGraph";
 import { useRouter } from 'vue-router'
 
 const store = useStore()

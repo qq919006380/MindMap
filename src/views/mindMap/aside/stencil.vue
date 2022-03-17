@@ -97,7 +97,7 @@
 
 <script setup>
 import { nextTick } from "vue";
-import BaseGraph from "../baseGraph";
+import BaseGraph from "../graph/baseGraph";
 import { Addon } from "@antv/x6";
 
 let dnd

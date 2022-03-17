@@ -1,6 +1,6 @@
 import { Graph, Shape } from "@antv/x6";
 import ports from "./ports"
-import { EdgeAtr, gridAtr } from "../mindMap/globalCfg"
+import { EdgeAtr, gridAtr } from "./globalCfg"
 // import rectNode from "../../components/mindMap/RectNode.vue";
 // import circleNode from "../../components/mindMap/circleNode.vue";
 

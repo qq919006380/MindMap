@@ -26,10 +26,6 @@
     <Aside></Aside>
   </el-drawer>
 
-  <!-- <el-icon class="icon-left" @click="setAsideDrawerObj(true)">
-    {{ status }}
-    <d-arrow-left />
-  </el-icon> -->
 </template>
 <script setup>
 import Canvas from "./canvas";
@@ -100,21 +96,5 @@ function setAsideDrawerObj(val) {
 .el-main {
   padding: 0;
 }
-.icon-left {
-  width: 25px;
-  border: 1px solid #999;
-  padding: 12px 0;
-  color: #999;
-  position: fixed;
-  bottom: 50%;
-  cursor: pointer;
-}
-.icon-left:hover {
-  color: #409eff;
-}
-.icon-left {
-  right: 0;
-  border-radius: 50px 0px 0px 50px;
-  border-right: none;
-}
+ 
 </style>
