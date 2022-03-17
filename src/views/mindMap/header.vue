@@ -19,7 +19,7 @@
       <el-col :span="16" class="menu-right">
         <span @click="configShow = !configShow">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-kuaijiejianshezhi" />
+            <use xlink:href="#icon-icon-config" />
           </svg>
           <span class="text">设置</span>
         </span>
@@ -47,7 +47,7 @@
 
         <span @click="clear">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-baocun1" />
+            <use xlink:href="#icon-clear1" />
           </svg>
           <span class="text">清空</span>
         </span>
