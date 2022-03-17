@@ -95,22 +95,22 @@
     </svg>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { nextTick } from "vue";
 import BaseGraph from "../graph/baseGraph";
-import { Addon } from "@antv/x6";
+import { Addon, Dom } from "@antv/x6";
 
-let dnd
+let dnd: any
 nextTick(() => {
     const { Dnd } = Addon
     dnd = new Dnd({
         target: BaseGraph.graph,
     })
 });
-function startDrag(e) {
-    let target = e.target.closest('.stencil')
+function startDrag(e: any) {
+    let target = e && e.target.closest('.stencil')
     const type = target.getAttribute('data-type')
-    let { ...obj } = BaseGraph.getCompontent()
+    let { ...obj }: any = BaseGraph.getCompontent()
     const node = obj[type]
     dnd.start(node, e)
 }
