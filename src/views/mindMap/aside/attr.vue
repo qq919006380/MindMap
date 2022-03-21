@@ -34,8 +34,8 @@
           <el-slider
             input-size="small"
             @input="notifyChange"
-            :min="0"
-            :max="10"
+            :min="item.min ? item.min : 0"
+            :max="item.max ? item.max : 10"
             v-model="editData[item.key]"
           ></el-slider>
         </el-form-item>
@@ -52,7 +52,7 @@ const divRef = ref()
 const selectNode = computed(() => store.state.editor.canvasTarget)
 
 // 渲染form-item List
-let attrsMap =  {
+let attrsMap = {
   textVal: { key: 'textVal', name: '内容', type: 'TextArea' },
   w: { key: 'w', name: '宽', type: 'Number', col: 12 },
   h: { key: 'h', name: '高', type: 'Number', col: 12 },
@@ -60,11 +60,13 @@ let attrsMap =  {
   fill: { key: 'fill', name: '填充颜色', type: "Color" },
   stroke: { key: 'stroke', name: '边框颜色', type: "Color" },
   strokeWidth: { key: 'strokeWidth', name: '边框粗细', type: "Slider" },
+  textFill: { key: 'textFill', name: '文字颜色', type: "Color" },
+  fontSize: { key: 'fontSize', name: '文字大小', type: "Slider", min: 0, max: 36 },
 }
 
 let attrsList = computed(() => {
   let shapeAttrMap = {
-    rect: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
+    rect: ['textVal', 'textFill', 'fontSize', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
     shape: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
     ellipse: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
     polygon: ['textVal', 'w', 'h', 'zIndex', 'fill', 'stroke', 'strokeWidth'],
@@ -101,6 +103,7 @@ proxy.$EventBus.on("click-canvas-target", () => {
  * 节点设置值
  */
 function notifyChange() {
+  console.log(curEditData.value)
   selectNode.value.attr({
     body: {
       stroke: editData.value.stroke,
@@ -108,6 +111,8 @@ function notifyChange() {
       strokeWidth: editData.value.strokeWidth
     },
     text: {
+      fill: editData.value.textFill,
+      fontSize: editData.value.fontSize,
       textWrap: {
         text: editData.value.textVal,
       }

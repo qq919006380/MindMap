@@ -110,10 +110,13 @@ onMounted(() => {
         fill: nodeAttrs.body.fill,
         stroke: nodeAttrs.body.stroke,
         strokeWidth: nodeAttrs.body.strokeWidth,
+        textFill: nodeAttrs.text.fill,
+        fontSize: nodeAttrs.text.fontSize
       }))
     })
   }
   graph.on("node:click", ({ node, e }) => {
+    window.n = node
     store.commit('editor/setAsideDrawerObj', { status: true, type: 'attr' })
     store.commit('editor/setCanvasTarget', node)
     setCurEditData(node)
