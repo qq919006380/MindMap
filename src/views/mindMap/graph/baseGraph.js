@@ -84,7 +84,6 @@ export default class BaseGraph {
         createEdge() {
           return new Shape.Edge({
             ...EdgeAtr,
-            connector: "normal",
             zIndex: 0,
           });
         },
@@ -153,6 +152,7 @@ export default class BaseGraph {
             connector: item.connector,
             attrs: item.attrs,
             router: item.router,
+            labels:item.labels
           });
         }
       });

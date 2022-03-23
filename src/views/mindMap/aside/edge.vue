@@ -38,6 +38,16 @@
                     v-model="editData[item.key]"
                 ></el-slider>
             </el-form-item>
+            <el-form-item :label="item.name" v-if="'Select' == item.type">
+                <el-select @change="notifyChange" v-model="editData[item.key]" class="m-2" placeholder="Select">
+                    <el-option
+                        v-for="item in item.options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    />
+                </el-select>
+            </el-form-item>
         </div>
     </el-form>
 </template>
@@ -56,10 +66,31 @@ let attrsMap = reactive({
 
     stroke: { key: 'stroke', name: '线颜色', type: "Color" },
     strokeWidth: { key: 'strokeWidth', name: '线粗细', type: "Slider" },
+    strokeDasharray: { key: 'strokeDasharray', name: '虚线间距', type: "Slider" },
+    connector: {
+        key: 'connector', name: '线类型', type: "Select", options: [
+            {
+                value: 'normal',
+                label: '默认',
+            },
+            {
+                value: "smooth",
+                label: "平滑"
+            },
+            {
+                value: "rounded",
+                label: "圆角"
+            },
+            {
+                value: "jumpover",
+                label: "跳线"
+            },
+        ]
+    },
 })
 let attrsList = computed(() => {
     let shapeAttrMap = {
-        edge: ['textVal', 'textFill', 'fontSize', 'stroke', 'strokeWidth'],
+        edge: ['textVal', 'textFill', 'fontSize', 'stroke', 'strokeWidth', 'strokeDasharray', 'connector'],
     }
     let curKey = shapeAttrMap[selectNode.value.shape] || []
     let arr = []
@@ -92,6 +123,7 @@ proxy.$EventBus.on("click-canvas-target", () => {
  * 节点设置值
  */
 function notifyChange() {
+    selectNode.value.setConnector(editData.value.connector)
     selectNode.value.setLabels([{
         attrs: {
             text: {
@@ -106,6 +138,7 @@ function notifyChange() {
         line: {
             strokeWidth: editData.value.strokeWidth,
             stroke: editData.value.stroke,
+            strokeDasharray: editData.value.strokeDasharray
         }
     })
 

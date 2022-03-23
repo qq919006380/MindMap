@@ -87,9 +87,10 @@ onMounted(() => {
       container: miniMapContainerRef.value,
     },
   });
+  // 设置线属性
   function setCurEditData2(edge) {
-    let labels=edge.labels[0]
-    window.l=edge.labels
+    window.e = edge
+    let labels = edge.labels[0]
     store.commit({
       type: 'editor/setCurEditData',
       data: JSON.parse(JSON.stringify({
@@ -97,10 +98,14 @@ onMounted(() => {
         textFill: labels.attrs.text.fill,
         fontSize: labels.attrs.text.fontSize,
         stroke: edge.attrs.line.stroke,
-        strokeWidth: edge.attrs.line.strokeWidth
+        strokeWidth: edge.attrs.line.strokeWidth,
+        strokeDasharray: edge.attrs.line.strokeDasharray,
+        connector: edge.connector,
+        router: edge.router
       }))
     })
   }
+  // 设置节点属性
   function setCurEditData(node) {
     let nodeAttrs = node.getAttrs()
     let nodeSize = node.getSize()

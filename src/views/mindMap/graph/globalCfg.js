@@ -1,11 +1,10 @@
 
 // 配置所有线
 let EdgeAtr = {
-    shape: 'custom-edge-label',
     attrs: {
         line: {
             stroke: '#1280FF', // 指定 path 元素的填充色
-            strokeDasharray: 3,
+            strokeDasharray: 3,//虚线间距
             targetMarker: {
                 name: 'classic', // 实心箭头
                 size: 8
