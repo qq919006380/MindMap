@@ -174,8 +174,6 @@ export default class BaseGraph {
           fill: '#EFF4FF',
         },
         text: {
-          // fill: '#666',
-          // fontSize:16,
           textWrap: {
             text: '',
             width: -10, // 宽度减少 10px

@@ -1,5 +1,7 @@
+
 // 配置所有线
 let EdgeAtr = {
+    shape: 'custom-edge-label',
     attrs: {
         line: {
             stroke: '#1280FF', // 指定 path 元素的填充色
@@ -13,12 +15,25 @@ let EdgeAtr = {
                 animation: 'ant-line 200s infinite linear',
             },
         },
+
     },
+    labels: [
+        {
+            attrs: {
+                text: {
+                    text: '',
+                    fontSize: 16,
+                    fill: '#333',
+                },
+            },
+        },
+    ],
     connector: 'rounded',//'normal',
     router: {
         name: "manhattan",
     },
 }
+
 let gridAtr = {
     type: "doubleMesh",
     size: 10,

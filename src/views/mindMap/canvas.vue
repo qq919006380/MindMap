@@ -88,10 +88,14 @@ onMounted(() => {
     },
   });
   function setCurEditData2(edge) {
-    window.e = edge
+    let labels=edge.labels[0]
+    window.l=edge.labels
     store.commit({
       type: 'editor/setCurEditData',
       data: JSON.parse(JSON.stringify({
+        textVal: labels.attrs.text.text,
+        textFill: labels.attrs.text.fill,
+        fontSize: labels.attrs.text.fontSize,
         stroke: edge.attrs.line.stroke,
         strokeWidth: edge.attrs.line.strokeWidth
       }))
@@ -104,14 +108,15 @@ onMounted(() => {
       type: 'editor/setCurEditData',
       data: JSON.parse(JSON.stringify({
         textVal: nodeAttrs.text.textWrap.text,
+        textFill: nodeAttrs.text.fill,
+        fontSize: nodeAttrs.text.fontSize,
         w: nodeSize.width,
         h: nodeSize.height,
         zIndex: node.zIndex,
         fill: nodeAttrs.body.fill,
         stroke: nodeAttrs.body.stroke,
-        strokeWidth: nodeAttrs.body.strokeWidth,
-        textFill: nodeAttrs.text.fill,
-        fontSize: nodeAttrs.text.fontSize
+        strokeWidth: nodeAttrs.body.strokeWidth
+
       }))
     })
   }
@@ -142,6 +147,7 @@ onMounted(() => {
     }, 0);
   });
   graph.on('edge:click', ({ edge }) => {
+    window.e = edge
     store.commit('editor/setAsideDrawerObj', { status: true, type: 'edge' })
     store.commit('editor/setCanvasTarget', edge)
     setCurEditData2(edge)

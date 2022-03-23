@@ -33,8 +33,8 @@
                 <el-slider
                     input-size="small"
                     @input="notifyChange"
-                    :min="0"
-                    :max="10"
+                    :min="item.min ? item.min : 0"
+                    :max="item.max ? item.max : 10"
                     v-model="editData[item.key]"
                 ></el-slider>
             </el-form-item>
@@ -50,12 +50,16 @@ const divRef = ref()
 const selectNode = computed(() => store.state.editor.canvasTarget)
 // 渲染form-item List
 let attrsMap = reactive({
+    textVal: { key: 'textVal', name: '内容', type: 'TextArea' },
+    textFill: { key: 'textFill', name: '文字颜色', type: "Color" },
+    fontSize: { key: 'fontSize', name: '文字大小', type: "Slider", min: 0, max: 36 },
+
     stroke: { key: 'stroke', name: '线颜色', type: "Color" },
     strokeWidth: { key: 'strokeWidth', name: '线粗细', type: "Slider" },
 })
 let attrsList = computed(() => {
     let shapeAttrMap = {
-        edge: ['stroke', 'strokeWidth'],
+        edge: ['textVal', 'textFill', 'fontSize', 'stroke', 'strokeWidth'],
     }
     let curKey = shapeAttrMap[selectNode.value.shape] || []
     let arr = []
@@ -88,6 +92,16 @@ proxy.$EventBus.on("click-canvas-target", () => {
  * 节点设置值
  */
 function notifyChange() {
+    selectNode.value.setLabels([{
+        attrs: {
+            text: {
+                fontSize: editData.value.fontSize,
+                fill: editData.value.textFill,
+                text: editData.value.textVal,
+            },
+        }
+
+    }])
     selectNode.value.setAttrs({
         line: {
             strokeWidth: editData.value.strokeWidth,
