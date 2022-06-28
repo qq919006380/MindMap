@@ -31,7 +31,6 @@
 import Canvas from "./canvas";
 import Header from "./header";
 import stencil from "./aside/stencil.vue"
-import "@antv/x6-vue-shape";
 import Aside from "./aside/index.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
