@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "report": "yarn build --report",
     "deploy": "bash deploy.sh",
     "lint": "vue-cli-service lint"
   },
@@ -12,23 +13,27 @@
     "@antv/x6": "^1.28.1",
     "@antv/x6-vue-shape": "^1.2.10",
     "@element-plus/icons-vue": "^0.2.4",
+    "compression-webpack-plugin": "^10.0.0",
     "core-js": "^3.6.5",
     "element-plus": "^1.3.0-beta.3",
     "hotkeys-js": "^3.8.7",
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
+    "unplugin-auto-import": "^0.9.1",
+    "unplugin-vue-components": "^0.20.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "webpack-bundle-analyzer": "^4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-typescript": "^5.0.1",
     "@vue/cli-service": "~5.0.0",
-    "typescript": "~4.5.5",
     "sass": "^1.48.0",
-    "sass-loader": "^10"
+    "sass-loader": "^10",
+    "typescript": "~4.5.5"
   },
   "browserslist": [
     "> 1%",
