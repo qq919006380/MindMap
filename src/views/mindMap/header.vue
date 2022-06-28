@@ -62,6 +62,8 @@
 </template>
 
 <script setup  >
+import 'element-plus/es/components/message/style/css'
+import 'element-plus/es/components/message-box/style/css'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import ShortcutKeyDialog from '../../components/ShortcutKeyDialog.vue'
@@ -97,7 +99,7 @@ proxy.$EventBus.on("clear-canvas-data", () => {
 function clear() {
   ElMessageBox.confirm(
     '是否确定清空当前画布和本地缓存的所有内容?',
-    'Warning',
+    '提示',
     {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
